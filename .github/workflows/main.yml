@@ -1,0 +1,21 @@
+name: Docker Build Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]  # Triggers on push to these branches
+    # Remove the branches line above if you want it to trigger on ANY push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1) Checkout repo
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # 2) Build Docker image
+    - name: Build Docker image
+      run: |
+        docker build -t my-app:latest .
+        docker image ls  # Optional: verify image was built
